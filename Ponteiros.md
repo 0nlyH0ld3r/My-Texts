@@ -1,11 +1,20 @@
+# UMA PEQUENA NOTA SOBRE O MEU TEXTO:
+
+Não leve tudo que foi dito como uma verdade absoluta, experimente, teste o que vier na mente (só cuidado para não escrever
+onde não deve) e pesquise sobre. É só um pequeno guia auxiliar para ter uma ideia do que são ponteiros. Estou longe de ser algum especialista,
+só decidi ajudar um pouco compartilhando o que sei sobre o assunto.
+
+O texto está em constante revisão, caso aviste algum erro e queira me alertar, pode entrar em contato
+
+
+- Bruno Vinicius | IFBA Campus Salvador - ADS - 2º Semestre 2026.2
+
 # Uma explicação rápida de ponteiros
 
 ## PRIMEIRO: VARIÁVEIS NA MEMÓRIA
 
-Variáveis são armazenadas na memória de acesso aleatório (RAM | Random Access Memory)
-Cada variável utiliza um tamanho diferente de memória que é, geralmente, medido em bytes.
-1 byte costuma ter 8 bits em sistemas convencionais. 
-O tamanho de uma variável pode mudar dependendo da arquitetura do sistema.
+Variáveis são armazenadas na memória de acesso aleatório (RAM | Random Access Memory). Cada variável utiliza um tamanho diferente de memória que é, geralmente,
+medido em bytes. 1 byte costuma ter 8 bits em sistemas convencionais. O tamanho de uma variável pode mudar dependendo da arquitetura do sistema.
 Uma tabela rápida para um sistema convencional x86_64:
 
 ```
@@ -20,13 +29,15 @@ Double      -> 16 bytes
 
 Cada variável recebe um endereço na memória. Por exemplo, se você criar uma variável e utilizar printf("%p", variavel) é possível imprimir esse endereço,
 que é, representado em hexadecimal.
+
 (Ex:  0x01f2de45c, onde 0x indica que se trata de um hexadecimal)
 
 O endereço de uma variável ocupa o número de bytes do tamanho do tipo da variável. Por exemplo, uma variável **char** possui tamanho de 1 byte assim, é possível ter 
 uma variável **char x** em **0x0001** e uma variável **char y** em **0x0002**, mas não é possível ter o mesmo para um **int**, pois esse tem tamanho de 4 bytes.
-Assim, dois inteiros conseguintes não podem ser armazenados nos endereços 0x0001 e 0x0002, mas sim 0x0001 e 0x0005 (Por mais que isso vá ser difícil de representar,
-afinal, em um programa de verdade, a chance de variáveis isoladas serem armazenadas em endereços conseguintes da memória é raro, apesar de ser a regra por de trás de
-vetores: Elementos em endereços conseguintes de memória).
+Assim, dois inteiros conseguintes não podem ser armazenados nos endereços 0x0001 e 0x0002, mas sim 0x0001 e 0x0005 
+
+(Por mais que isso vá ser difícil de representar, afinal, em um programa de verdade, a chance de variáveis isoladas serem armazenadas em endereços conseguintes 
+da memória é raro, apesar de ser a regra por de trás de vetores: Elementos em endereços conseguintes de memória).
 
 ## EXPLICANDO SOBRE PONTEIROS
 
@@ -76,10 +87,9 @@ int *ponteiro = &variavel
 ### Strings Hardcoded
 
 Strings hardcodeds são strings que fora passadas diretamente para um ponteiro, sem nenhum intermediário (como um vetor armazenando a string sendo passado para o 
-ponteiro).
-O que ocorre nesse caso é que, devido à falta de uma estrutura para armazenar a string (ponteiros só armazenam endereços), a string é armazenada diretamente na memória
-em um bloco de memória com permissão de somente leitura e então o ponteiro recebe o endereço para o primeiro caractere da string.
-Não é possível modificar o valor dessas strings. Caso tente, há duas opções (sendo a segunda a mais provável).
+ponteiro). O que ocorre nesse caso é que, devido à falta de uma estrutura para armazenar a string (ponteiros só armazenam endereços),
+a string é armazenada diretamente na memória em um bloco de memória com permissão de somente leitura e então o ponteiro recebe o endereço para o primeiro caractere 
+da string. Não é possível modificar o valor dessas strings. Caso tente, há duas opções (sendo a segunda a mais provável).
 
 1- Nada acontece. Literalmente nada.
 2- O programa quebra completamente (o correto e mais comum).
@@ -92,9 +102,9 @@ que não pode ser modificado. Então, dessa forma, tentar modificar a string pod
     
 ```
 
-Como citado anteriormente, strings atribuidas DIRETAMENTE para um ponteiro NÃO PODEM e NÃO DEVEM ser modificadas.
-São strings fixas (Apesar de que você pode sim fazer o vetor apontar para outra string e descartar a antiga, simplesmente
-atribuindo outra string para o ponteiro).
+Como citado anteriormente, strings hardcoded atribuídas para um ponteiro NÃO PODEM e NÃO DEVEM ser modificadas (apesar de não ser o caso se passadas para um vetor).
+São strings fixas. Entretanto, caso deseje mudar a string contida no vetor, há uma forma: Fazendo ele apontar para outra string, ou apontar para um vetor de caracteres,
+que permitirá a edição da string (seja com funções ou alterando caracteres individualmente). 
 
 
 ``` 
@@ -121,15 +131,17 @@ printf("%d\n", ptr == string);
 
 Ponteiros são declarados da seguinte forma:
  **tipo *nome**
-    Onde tipo de refere ao tipo da variável que o ponteiro deve receber, afinal, como cada variável ocupa n bytes na memória,
-    ponteiros vão se comportar diferente dependendo do tipo de variável que devem receber.
-    Ex:  **int *ponteiro**
-    Ex: **char *ponteiro2**
-        - Obs: É possível também declarar int* ponteiro   ou int * ponteiro, isso depende muito de estética, mas, por minha opinião pessoal,
-        acho que faz mais sentido utilizar  int *ponteiro (apesar de que não discordo de utilizar o asterísco ao lado do int).
-        Motivo:  int * ponteiro   faz parecer muito uma multiplicação
-        Motivo2: para utilizar o valor de uma variável armazenada em um ponteiro, utiliza-se *nome. De tal forma, me faz mais sentido
-        utilizar uma estrutura semelhante durante a declaração.
+    
+Onde tipo de refere ao tipo da variável que o ponteiro deve receber, afinal, como cada variável ocupa n bytes na memória,
+ponteiros vão se comportar diferente dependendo do tipo de variável que devem receber.
+Ex:  **int *ponteiro**
+Ex: **char *ponteiro2**
+
+Obs: É possível também declarar int* ponteiro   ou int * ponteiro, isso depende muito de estética, mas, por minha opinião pessoal,
+acho que faz mais sentido utilizar  int *ponteiro (apesar de que não discordo de utilizar o asterísco ao lado do int).
+Motivo:  int * ponteiro   faz parecer muito uma multiplicação
+Motivo2: para utilizar o valor de uma variável armazenada em um ponteiro, utiliza-se *nome. De tal forma, me faz mais sentido
+utilizar uma estrutura semelhante durante a declaração.
 
 ## RECEBENDO VALOR PARA UM PONTEIRO.
 
@@ -186,15 +198,6 @@ printf("%d", x)
 
 - Inclusive é possível sair printando endereços aleatórios com isso. Só não recomendo tentar alterar o valor nesses endereços
 e nem garanto que vá ter algo / algo significativo nesses endereços.
-
-# UMA PEQUENA NOTA SOBRE O MEU TEXTO:
-
-Não leve tudo que foi dito como uma verdade absoluta, experimente, teste o que vier na mente (só cuidado para não escrever
-onde não deve) e pesquise sobre.
-É só um pequeno guia auxiliar para ter uma ideia do que são ponteiros. Tem muito mais escondido nisso, como por exemplo, a ligação entre vetores e ponteiros,
-ponteiros para ponteiros (que eu só citei), matrizes de ponteiros (essencialmente a mesma coisa que ponteiros para ponteiros, o que ainda me confunde às vezes).
-Estou longe de ser algum especialista, só decidi ajudar um pouco compartilhando o que sei sobre o assunto.
-
 
 # ALGUNS USOS DE PONTEIROS:
 
