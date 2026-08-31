@@ -283,9 +283,11 @@ A diferença entre incremento e decremento para adição e subtração é que in
 ```
 
 int x = 4;
-++x;  /* Isso muda o valor de x automaticamente pra 5. Da mesma forma ocorreria com um ponteiro, que subiria um endereço de memória. */
-x + 1; /* Isso daqui não vai fazer nada, mas pode ser utilizado como valor para atribuições, chamadas de funções, ou no caso de um ponteiro, para acessar
-outro endereço de memória por meio da aritmética, sem mudar o endereço armazenado no ponteiro. */
+++x;  /* Isso muda o valor de x automaticamente pra 5. 
+        Da mesma forma ocorreria com um ponteiro, que subiria um endereço de memória. */
+x + 1; /* Isso daqui não vai fazer nada, mas pode ser utilizado como valor para atribuições,
+        chamadas de funções, ou no caso de um ponteiro, para acessar
+        outro endereço de memória por meio da aritmética, sem mudar o endereço armazenado no ponteiro. */
 
 ```
 Quando se trata de alguma operação como ler o conteúdo de uma string uma única vez, fará mais sentido incrementar a string, haja vista que operações de incremento são
