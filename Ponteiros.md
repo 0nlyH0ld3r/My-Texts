@@ -64,7 +64,7 @@ int ptr3 = vetor[5];
 
 ### EXEMPLOS:
 
--   Em um arduíno, cada pino é representado por um endereço de memória. Assim, para acessar e utilizar algum pino no código, é possível utilizar uma MACRO 
+Em um arduíno, cada pino é representado por um endereço de memória. Assim, para acessar e utilizar algum pino no código, é possível utilizar uma MACRO 
 (Macros são tipo: #Define ABC 123  , de forma que ABC é a Macro de valor 123), que possui o endereço de memória do pino e utilizar um ponteiro para receber
 esse endereço. Um ponteiro em uma função para receber o endereço de n-pino, que será dado como argumento para a função.
 
@@ -92,6 +92,7 @@ a string é armazenada diretamente na memória em um bloco de memória com permi
 da string. Não é possível modificar o valor dessas strings. Caso tente, há duas opções (sendo a segunda a mais provável).
 
 1- Nada acontece. Literalmente nada.
+
 2- O programa quebra completamente (o correto e mais comum).
 
 ```
@@ -137,21 +138,27 @@ ponteiros vão se comportar diferente dependendo do tipo de variável que devem 
 Ex:  **int *ponteiro**
 Ex: **char *ponteiro2**
 
-Obs: É possível também declarar int* ponteiro   ou int * ponteiro, isso depende muito de estética, mas, por minha opinião pessoal,
+- Obs: É possível também declarar int* ponteiro   ou int * ponteiro, isso depende muito de estética, mas, por minha opinião pessoal,
 acho que faz mais sentido utilizar  int *ponteiro (apesar de que não discordo de utilizar o asterísco ao lado do int).
-Motivo:  int * ponteiro   faz parecer muito uma multiplicação
-Motivo2: para utilizar o valor de uma variável armazenada em um ponteiro, utiliza-se *nome. De tal forma, me faz mais sentido
+
+    - Motivo:  int * ponteiro   faz parecer muito uma multiplicação
+
+    - Motivo2: para utilizar o valor de uma variável armazenada em um ponteiro, utiliza-se *nome. De tal forma, me faz mais sentido
 utilizar uma estrutura semelhante durante a declaração.
 
 ## RECEBENDO VALOR PARA UM PONTEIRO.
 
 Como dito anteriormente, ponteiros recebem endereços de memória. De tal forma, para um ponteiro receber um valor, basta somente uma coisa.
 Um endereço de memória!
+
 Como conseguir? É possível buscar na sorte algum endereço de memória aleatório (Não recomendado, a não ser que você queira alterar o valor de
 algum endereço aleatório na sua RAM, incluindo algo que possa afetar o sistema. Ou, se você souber algum endereço de memória definido com alguma função,
 como no caso citado acima de um arduino).
+
 Mas, também, é possível "extrair" o endereço de memória de uma variável utilizando o operador &   (sim, o mesmo do AND bit a bit)
+
 - Exemplo:   int *ptr = &x;
+
 Se trata da mesma sintaxe de um scanf() recebendo variáveis como argumento, pois o scanf() recebe ponteiros para endereços de variáveis para alterar o valor
 das mesmas (Como ensinado na aula de Dihego de usar ponteiros para alterar variáveis).
 
@@ -196,8 +203,8 @@ printf("%d", x)
 
 ```
 
-- Inclusive é possível sair printando endereços aleatórios com isso. Só não recomendo tentar alterar o valor nesses endereços
-e nem garanto que vá ter algo / algo significativo nesses endereços.
+Inclusive é possível sair printando endereços aleatórios com isso caso não utilize as flags de segurança necessárias (do compilador gcc).
+Só não recomendo tentar alterar o valor nesses endereços e nem garanto que vá ter algo / algo significativo nesses endereços.
 
 # ALGUNS USOS DE PONTEIROS:
 
@@ -209,6 +216,7 @@ ex:  int main(); int somar(); int *funcao_devolve_ponteiro();
 Existem duas relações entre ponteiros e funções:
 
 1 - Funções de ponteiro para algum tipo
+
 2 - Funções que recebem ponteiros de algum tipo como argumentos.
 
 ## FUNÇÕES DE PONTEIRO
@@ -231,8 +239,8 @@ int main() {
 
 ```
 
-Outro uso muito importante para funções que retornam ponteiros é para retornar vetores.
-Tente criar uma função que retorne um vetor, independente de qual seja o seu tipo.
+Outro uso muito importante para funções que retornam ponteiros é para retornar vetores. Tente criar uma função que retorne um vetor, independente de qual seja o seu tipo.
+
 Caso sua ideia tenha sido retornar o nome do vetor, ele irá falhar. E retornar um elemento do vetor não é a mesma coisa que retornar o vetor inteiro.
 Isso se deve pois, em sua essência, o vetor funciona similarmente a um ponteiro. O nome de um vetor referencia o primeiro elemento do mesmo próprio vetor.
 Ou seja: o nome de um vetor se trata, essencialmente, de um ponteiro para o seu primeiro elemento. E, assim como citado anteriormente, os elementos
@@ -260,10 +268,12 @@ desenvolvedor C competente (Ou se quer passar com facilidade nas matérias de C 
 
 A aritmética de ponteiros é uma técnica que consiste em se mover por endereços da memória utilizando operações de subtração e adição em conjunto com ponteiros
 (Incremento e Decremento são, de certa forma, Adição e Subtração)
+
 Como já expliquei anteriormente, ao incrementar / somar / decrementar / subtrair o endereço de um ponteiro irá o fazer andar n-bytes na memória, de acordo o
 o tamanho do tipo em que o ponteiro foi declarado (Ponteiros **void** não podem ser utilizados para aritmética de ponteiro, a não ser que seja realizado type cast
 neles para o tipo de ponteiro desejado. Se quiser mais informações, pesquise sobre type cast ou leia em algum livro, é algo relativamente simples, mas foge do conteúdo
 de ponteiros).
+
 A diferença entre incremento e decremento para adição e subtração, é que incrementar/decrementar um ponteiro irá aplicar a mudança de endereço diretamente no ponteiro.
 Quando se trata de alguma operação como ler o conteúdo de uma string uma única vez, fará mais sentido incrementar a string, haja vista que operações de incremento são
 mais otimizadas do que adições.
@@ -294,7 +304,8 @@ printf("O elemento %d do vetor é:%d\n", i, *(ptr + i) );
 
 ```
 
-A explicação do segundo método:
+- A explicação do segundo método:
+
 Como o nome do vetor é um ponteiro para o primeiro elemento, *(ptr + 0)  <- Endereço entre parênteses e o operador * para pegar o elemento do endereço
 irá pegar o valor do primeiro elemento. Então, caso o x valha 0 (primeiro elemento), ele irá ler o primeiro elemento do vetor.
 *(ptr + 4) irá ler o quinto. Se for perceber, utilizar ponteiros dessa forma lembra muito o conceito de indexação de vetores (vetor[0]). Isso se deve ao fato
