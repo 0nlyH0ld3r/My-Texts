@@ -23,16 +23,16 @@ que é, representado em hexadecimal.
 (Ex:  0x01f2de45c, onde 0x indica que se trata de um hexadecimal)
 
 O endereço de uma variável ocupa o número de bytes do tamanho do tipo da variável. Por exemplo, uma variável **char** possui tamanho de 1 byte assim, é possível ter 
-uma variável **char x** em **0x0001** e uma variável **char y** em **0x0002**, mas não é possível ter o mesmo pra um **int**, pois esse tem tamanho de 4 bytes.
+uma variável **char x** em **0x0001** e uma variável **char y** em **0x0002**, mas não é possível ter o mesmo para um **int**, pois esse tem tamanho de 4 bytes.
 Assim, dois inteiros conseguintes não podem ser armazenados nos endereços 0x0001 e 0x0002, mas sim 0x0001 e 0x0005 (Por mais que isso vá ser difícil de representar,
 afinal, em um programa de verdade, a chance de variáveis isoladas serem armazenadas em endereços conseguintes da memória é raro, apesar de ser a regra por de trás de
 vetores: Elementos em endereços conseguintes de memória).
 
 ## EXPLICANDO SOBRE PONTEIROS
 
-No que isso importa? Bem, ponteiros são variáveis que guardam algum endereço da memória. Sim, ALGUM e não O DE UMA VARIÁVEL. Em Ponteiros, é possível guardar qualquer
-endereço de memória. Uma variável, o primeiro elemento de um vetor, o segundo elemento de um vetor, outro ponteiro (Ponteiro pra ponteiro),
-strings digitadas no código (string hardcoded), endereços de memória que armazenem instruções específicas do hardware que executem algum comando.
+Ponteiros são variáveis que guardam algum endereço da memória. Sim, ALGUM e não O DE UMA VARIÁVEL. Em Ponteiros, é possível guardar qualquer endereço de memória.
+Uma variável, o nome de um vetor (que é o endereço pro primeiro elemento), o segundo elemento de um vetor, outro ponteiro (Ponteiro para ponteiro), strings digitadas
+no código (string hardcoded), endereços de memória que armazenem instruções específicas do hardware que executem algum comando.
 
 ```
 
@@ -40,13 +40,22 @@ strings digitadas no código (string hardcoded), endereços de memória que arma
 
 char *ptr = "Isso é uma string hard-coded"
 
+// Isso é um ponteiro para um vetor (aponta pro primeiro endereço do vetor)
+
+int vetor[10];
+int *ptr2 = vetor;
+
+// Um ponteiro para o sexto elemento de um vetor (que é uma variável)
+
+int ptr3 = vetor[5];
+
 ```
 
 ### EXEMPLOS:
 
 -   Em um arduíno, cada pino é representado por um endereço de memória. Assim, para acessar e utilizar algum pino no código, é possível utilizar uma MACRO 
 (Macros são tipo: #Define ABC 123  , de forma que ABC é a Macro de valor 123), que possui o endereço de memória do pino e utilizar um ponteiro para receber
-esse endereço. Um ponteiro em uma função para receber o endereço de n-pino, que será dado como argumento pra função.
+esse endereço. Um ponteiro em uma função para receber o endereço de n-pino, que será dado como argumento para a função.
 
 - A função abaixo recebe um ponteiro / endereço de memória:
 
@@ -77,7 +86,7 @@ Não é possível modificar o valor dessas strings. Caso tente, há duas opçõe
 
 ```
 
-char *ponteiro_pra_string = 
+char *ponteiro_para_string = 
 "Essa string está sendo passada para um ponteiro. Como não foi armazenada em nenhum vetor, ela é guardada em um local especial da memória 
 que não pode ser modificado. Então, dessa forma, tentar modificar a string pode causar efeitos não esperados"
     
@@ -132,7 +141,7 @@ como no caso citado acima de um arduino).
 Mas, também, é possível "extrair" o endereço de memória de uma variável utilizando o operador &   (sim, o mesmo do AND bit a bit)
 - Exemplo:   int *ptr = &x;
 Se trata da mesma sintaxe de um scanf() recebendo variáveis como argumento, pois o scanf() recebe ponteiros para endereços de variáveis para alterar o valor
-das mesmas (Como ensinado na aula de Dihego de usar ponteiros pra alterar variáveis).
+das mesmas (Como ensinado na aula de Dihego de usar ponteiros para alterar variáveis).
 
 ## ACESSANDO VALORES POR MEIO DE PONTEIROS
 
@@ -143,7 +152,7 @@ Claro. Além de ser possível utilizar um ponteiro ou um endereço de memória p
 
 int x = 10;
 int *ptr = &x
-printf("%p, &p", ptr, &x);  /* Ambos produzem o mesmo output, afinal, ambos são a mesma forma de disponibilizar o endereço de x pra uma função. */
+printf("%p, &p", ptr, &x);  /* Ambos produzem o mesmo output, afinal, ambos são a mesma forma de disponibilizar o endereço de x para uma função. */
 
 --------------------------------------------
  output| 0x0001, 0x0001     /* <- Essa é a saída do programa (Apenas simbólico aqui por que o número seria gigante em um sistema real) */
@@ -178,51 +187,57 @@ printf("%d", x)
 - Inclusive é possível sair printando endereços aleatórios com isso. Só não recomendo tentar alterar o valor nesses endereços
 e nem garanto que vá ter algo / algo significativo nesses endereços.
 
-# SE VOCÊ LEU ATÉ AQUI, UMA RECOMENDAÇÃO:
+# UMA PEQUENA NOTA SOBRE O MEU TEXTO:
 
-Não leve tudo que foi dito como uma verdade absoluta, experimente, teste o que vier na mente (só cuidado pra não escrever
+Não leve tudo que foi dito como uma verdade absoluta, experimente, teste o que vier na mente (só cuidado para não escrever
 onde não deve) e pesquise sobre.
-Eu digitei isso rápido antes de me arrumar pra aula e sem consultar nenhum material, somente com o que tinha de cabeça sobre ponteiros.
-Algumas coisas estão, de fato, faltando. É só um pequeno guia auxiliar pra ter uma ideia do que são ponteiros. Tem muito mais escondido nisso,
-como por exemplo, a ligação entre vetores e ponteiros, ponteiros pra ponteiros (que eu só citei), matrizes de ponteiros (essencialmente a mesma coisa
-que ponteiros pra ponteiros, o que ainda me confunde às vezes).
-Estou longe de ser algum especialista, só queria ajudar um pouco.
+É só um pequeno guia auxiliar para ter uma ideia do que são ponteiros. Tem muito mais escondido nisso, como por exemplo, a ligação entre vetores e ponteiros,
+ponteiros para ponteiros (que eu só citei), matrizes de ponteiros (essencialmente a mesma coisa que ponteiros para ponteiros, o que ainda me confunde às vezes).
+Estou longe de ser algum especialista, só decidi ajudar um pouco compartilhando o que sei sobre o assunto.
 
 
 # ALGUNS USOS DE PONTEIROS:
-Como vocês devem ter entendido pela aula do dia 24/08 de Estruturas de dados e algoritmos:
-funções são blocos de códigos que podem ser evocadas a qualquer momento após a sua criação em outras funções.
-A declaração de uma função consiste em:
 
-tipo nome(tipo parâmetro);
+Como vocês devem ter entendido pela aula do dia 24/08 de Estruturas de dados e algoritmos e também pode ser visto no outro arquivo que fala sobre funções:
+Funções são blocos de códigos que podem ser evocadas a qualquer momento após a sua criação em outras funções.
 
-com os parâmetros podendo ser omitidos caso não haja, ou declarando com o parâmetro **void** (vazio)
-ex:  int main(void)
+ex:  int main(); int somar(); int *funcao_devolve_ponteiro();
 
 Existem duas relações entre ponteiros e funções:
 
-1 - Funções de ponteiro pra algum tipo
+1 - Funções de ponteiro para algum tipo
 2 - Funções que recebem ponteiros de algum tipo como argumentos.
 
 ## FUNÇÕES DE PONTEIRO
 
-Funções de ponteiros se tratam de funções que retornam algum um ponteiro após a execução.
-Da mesma forma que você pode fazer um int soma(int x, int y) que retorna x + y, você pode fazer
-uma função int *maior(int x, int y) que retorna o endereço de alguma delas (um ponteiro).
+Funções de ponteiros se tratam de funções que retornam um ponteiro após a execução. Da mesma forma que você pode fazer um int soma(int x, int y) que retorna x + y,
+você pode fazer uma função int *maior(int x, int y) que retorna o endereço de alguma delas (um ponteiro).
 
-0x01 suba 1 = 0x05
+```
+
+int *maior_entre_dois(int *x, int *y) {
+    if ( *x < *y) return y; // Se o valor de Y for maior que X, retorna Y.
+
+    return x; // Se não, retorna X
+}
+
+int main() {
+    int x = 4, y = 5;
+    int *ponteiro_para_o_maior = maior_entre_dois(&x, &y);
+}
+
+```
 
 Outro uso muito importante para funções que retornam ponteiros é para retornar vetores.
 Tente criar uma função que retorne um vetor, independente de qual seja o seu tipo.
 Caso sua ideia tenha sido retornar o nome do vetor, ele irá falhar. E retornar um elemento do vetor não é a mesma coisa que retornar o vetor inteiro.
-Isso se deve pois, em sua essência, o vetor funciona similarmente a um ponteiro. O nome de um vetor referencia o primeiro elemento do mesmo.
+Isso se deve pois, em sua essência, o vetor funciona similarmente a um ponteiro. O nome de um vetor referencia o primeiro elemento do mesmo próprio vetor.
 Ou seja: o nome de um vetor se trata, essencialmente, de um ponteiro para o seu primeiro elemento. E, assim como citado anteriormente, os elementos
-seguintes são postos em posições conseguintes ao primeiro.
-Ou seja:  O vetor **char string[10]**, que se inicia na posição 0x0001 e termina na 0x0010 (10 elementos de 1 byte), possui como nome **string** 
-e esse nome é um ponteiro para o endereço 0x0001.
+seguintes são postos em posições conseguintes da memória em relação ao endereço do primeiro elemento. Ou seja:  O vetor **char string[10]**,
+que se inicia na posição 0x0001 e termina na 0x0010 (10 elementos de 1 byte), possui como nome **string** e esse nome é um ponteiro para o endereço 0x0001.
 
 - Isso se liga diretamente com aritmética de ponteiros, pois, caso você incremente um ponteiro,
-ele avançara o número de bytes do seu tipo em um endereço de memória.
+ele avançará o número de bytes do seu tipo em um endereço de memória.
 
 ```
 
@@ -233,7 +248,7 @@ ptr + 1 == 0x0005
 
 # UM POUCO SOBRE ARITMÉTICA DE PONTEIROS
 
-Como foi dito anteriormente, é possível utilizar o endereço de um ponteiro com operações matemáticas pra o mover pela memória.
+Como foi dito anteriormente, é possível utilizar o endereço de um ponteiro com operações matemáticas para o mover pela memória.
 Isso se chama aritmética de ponteiros e não será algo tratado com muita profundidade aqui, mas eu mandei o livro
 "Understanding C Pointers | Richard Reese". É um livro focado em ponteiros da linguagem C, é um material indispensável se você pretende se tornar um
 desenvolvedor C competente (Ou se quer passar com facilidade nas matérias de C da faculdade). Esse livro vai tratar melhor sobre o assunto inteiro.
@@ -260,7 +275,7 @@ while (*ptr) {
     ++ptr;
 }
 
-/* O código acima irá printar cada caracter da string individualmente e criará uma nova linha após ele, incrementando o ponteiro pra seguir pro próximo caracter. 
+/* O código acima irá printar cada caracter da string individualmente e criará uma nova linha após ele, incrementando o ponteiro para seguir pro próximo caracter. 
 * Nota-se que é utilizado while (*ptr), pois o último elemento de uma string é o \0 (NULL Terminator), que por sua vez tem valor 0 (falso), então ao chegar nele, 
 o loop irá parar. */
 
@@ -271,8 +286,9 @@ int *ptr = vetor, i;
 /* É possível declarar um ponteiro e uma variável normal na mesma linha.*/
 
 printf("Digite o número do elemento do vetor que deseja ler (De 0 a 4)")
-scanf("%d", &x);
-printf("O elemento %d do vetor é:%d\n", i, *(ptr + (i)));
+scanf("%d", &i);
+printf("O elemento %d do vetor é:%d\n", i, *(ptr + i) );
+
 ```
 
 A explicação do segundo método:
@@ -285,6 +301,7 @@ de que a indexação de vetores tem como base a aritmética de ponteiros (mas a 
 
 int vetor[5] = { 2, 4, 6, 8, 10};
 int *ptr = vetor;
-printf("%d\n",*(ptr + i) == vetor[1]);
+printf("%d\n", *(ptr + i) == vetor[1]); // Para printar se os valores são iguais
+printf("%d\n", (ptr + i) == &vetor[1]); // Para printar se os endereços são iguais
 
 ```
