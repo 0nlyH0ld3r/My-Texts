@@ -91,9 +91,9 @@ ponteiro). O que ocorre nesse caso é que, devido à falta de uma estrutura para
 a string é armazenada diretamente na memória em um bloco de memória com permissão de somente leitura e então o ponteiro recebe o endereço para o primeiro caractere 
 da string. Não é possível modificar o valor dessas strings. Caso tente, há duas opções (sendo a segunda a mais provável).
 
-1- Nada acontece. Literalmente nada.
+1 - Nada acontece. Literalmente nada.
 
-2- O programa quebra completamente (o correto e mais comum).
+2 - O programa quebra completamente (o correto e mais comum).
 
 ```
 
@@ -178,7 +178,7 @@ printf("%p, &p", ptr, &x);  /* Ambos produzem o mesmo output, afinal, ambos são
 
 ```
 
-É possível acessar os valores do endereço armazenado no ponteiro utilizando, novamente, o operador *
+- É possível acessar os valores do endereço armazenado no ponteiro utilizando, novamente, o operador *
 Ex:  
 
 ```
@@ -191,7 +191,7 @@ printf("%d", *ptr);
 ```
 
 
-De tal forma, é possível realizar matemáticas com os endereços (geralmente variáveis) que estão contidas em um ponteiro.
+- De tal forma, é possível realizar matemáticas com os endereços (geralmente variáveis) que estão contidas em um ponteiro.
 
 ```
 
@@ -211,7 +211,11 @@ Só não recomendo tentar alterar o valor nesses endereços e nem garanto que v�
 Como vocês devem ter entendido pela aula do dia 24/08 de Estruturas de dados e algoritmos e também pode ser visto no outro arquivo que fala sobre funções:
 Funções são blocos de códigos que podem ser evocadas a qualquer momento após a sua criação em outras funções.
 
-ex:  int main(); int somar(); int *funcao_devolve_ponteiro();
+```
+
+int main(); int somar(); int *funcao_devolve_ponteiro();
+
+```
 
 Existem duas relações entre ponteiros e funções:
 
@@ -261,7 +265,7 @@ ptr + 1 == 0x0005
 
 Como foi dito anteriormente, é possível utilizar o endereço de um ponteiro com operações matemáticas para o mover pela memória.
 Isso se chama aritmética de ponteiros e não será algo tratado com muita profundidade aqui, mas eu mandei o livro
-"Understanding C Pointers | Richard Reese". É um livro focado em ponteiros da linguagem C, é um material indispensável se você pretende se tornar um
+"Understanding C Pointers | Richard Reese". O livro é focado em ponteiros na linguagem C. É um material indispensável se você pretende se tornar um
 desenvolvedor C competente (Ou se quer passar com facilidade nas matérias de C da faculdade). Esse livro vai tratar melhor sobre o assunto inteiro.
 
 ## EXPLICAÇÃO RÁPIDA SOBRE ARITMÉTICA DE PONTEIROS
@@ -269,12 +273,21 @@ desenvolvedor C competente (Ou se quer passar com facilidade nas matérias de C 
 A aritmética de ponteiros é uma técnica que consiste em se mover por endereços da memória utilizando operações de subtração e adição em conjunto com ponteiros
 (Incremento e Decremento são, de certa forma, Adição e Subtração)
 
-Como já expliquei anteriormente, ao incrementar / somar / decrementar / subtrair o endereço de um ponteiro irá o fazer andar n-bytes na memória, de acordo o
-o tamanho do tipo em que o ponteiro foi declarado (Ponteiros **void** não podem ser utilizados para aritmética de ponteiro, a não ser que seja realizado type cast
-neles para o tipo de ponteiro desejado. Se quiser mais informações, pesquise sobre type cast ou leia em algum livro, é algo relativamente simples, mas foge do conteúdo
-de ponteiros).
+Ao incrementar / somar / decrementar / subtrair o endereço de um ponteiro irá o fazer andar n-bytes na memória, de acordo com o tamanho do tipo em que o ponteiro foi
+declarado (Ponteiros **void** não podem ser utilizados para aritmética de ponteiro, a não ser que seja realizado type cast neles para o tipo de ponteiro desejado.
+Se quiser mais informações sobre typecast, pesquise sobre o assunto ou leia em algum livro, é algo relativamente simples, mas foge do conteúdo de ponteiros).
+(Talvez eu adicione sobre typecast em outro arquivo).
 
-A diferença entre incremento e decremento para adição e subtração, é que incrementar/decrementar um ponteiro irá aplicar a mudança de endereço diretamente no ponteiro.
+A diferença entre incremento e decremento para adição e subtração é que incrementar/decrementar um ponteiro irá aplicar a mudança de endereço diretamente.
+
+```
+
+int x = 4;
+++x;  /* Isso muda o valor de x automaticamente pra 5. Da mesma forma ocorreria com um ponteiro, que subiria um endereço de memória. */
+x + 1; /* Isso daqui não vai fazer nada, mas pode ser utilizado como valor para atribuições, chamadas de funções, ou no caso de um ponteiro, para acessar
+outro endereço de memória por meio da aritmética, sem mudar o endereço armazenado no ponteiro. */
+
+```
 Quando se trata de alguma operação como ler o conteúdo de uma string uma única vez, fará mais sentido incrementar a string, haja vista que operações de incremento são
 mais otimizadas do que adições.
 
