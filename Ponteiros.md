@@ -21,6 +21,7 @@ Uma tabela rápida para um sistema convencional x86_64:
 
 Character   -> 1  byte
 Integers    -> 4  bytes
+Ponteiros   -> 4  bytes
 Float       -> 8  bytes
 Pointer     -> 8  bytes
 Double      -> 16 bytes
@@ -287,7 +288,7 @@ int x = 4;
         Da mesma forma ocorreria com um ponteiro, que subiria um endereço de memória. */
 
 x + 1; /* Isso daqui não vai fazer nada, mas pode ser utilizado como valor para atribuições,
-        chamadas de funções, ou no caso de um ponteiro, para acessar
+       chamadas de funções, ou no caso de um ponteiro, para acessar
         outro endereço de memória por meio da aritmética, sem mudar o endereço armazenado no ponteiro. */
 
 ```
